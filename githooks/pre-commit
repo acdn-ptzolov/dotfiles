@@ -1,0 +1,12 @@
+#!/bin/sh
+msg="fmt.Println"
+occurences="$(ag -i $msg ./*)"
+count="$(ag -i $msg ./* | wc -l)"
+if [ $count = 0 ];
+then
+ exit 0
+else
+ echo "Remove fmt.Println"
+ echo "{$occurences}" | grep --color -E $msg
+ exit 1
+fi
